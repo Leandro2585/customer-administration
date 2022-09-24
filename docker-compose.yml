@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment: 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: '12345678'
+      POSTGRES_DB: customer_administration
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+  api:
+    container_name: customer_administration
+    image: customer_administration_v1
+    restart: always
+    build: .
+    command: yarn start
+    env_file:
+      - .env
+    volumes:
+      - ./build:/usr/src/customer_administration_v1/build
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    depends_on:
+      - db
