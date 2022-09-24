@@ -7,5 +7,5 @@ export interface FindByEmailUserRepository {
 export namespace FindByEmailUserRepository {
   export type Input = { email: string }
 
-  export type Output = { user: UserModel }
+  export type Output = { user: UserModel | undefined }
 }
