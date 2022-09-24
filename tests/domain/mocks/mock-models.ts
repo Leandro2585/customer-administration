@@ -2,6 +2,7 @@ import { UserModel } from '@domain/models'
 import { AddressModel } from '@domain/models/address-model'
 
 export const mockUser = (): UserModel => ({
+	id: 1,
 	name: 'any_name',
 	email: 'any_mail@mail.com',
 	birth_date: new Date(2003, 4, 20),
@@ -13,6 +14,7 @@ export const mockUser = (): UserModel => ({
 })
 
 export const mockAddress = (): AddressModel => ({
+	id: 1,
 	zipcode: '69905-450',
 	city: 'Rio Branco',
 	uf: 'AC',

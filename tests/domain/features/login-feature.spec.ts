@@ -3,23 +3,26 @@ import { mock, MockProxy } from 'jest-mock-extended'
 import { FindByEmailUserRepository } from '@domain/protocols/repositories'
 import { NotFoundError } from '@domain/errors'
 import { LoginFeature } from '@domain/features'
-import { HashComparer } from '@domain/protocols/cryptography'
+import { Encrypter, HashComparer } from '@domain/protocols/cryptography'
 import { mockUser } from '@tests/domain/mocks'
 
 describe('login feature', () => {
 	let sut: LoginFeature
 	let userRepository: MockProxy<FindByEmailUserRepository>
 	let hashComparer: MockProxy<HashComparer>
+	let encrypter: MockProxy<Encrypter>
 
 	beforeAll(() => {
 		userRepository = mock()
 		hashComparer = mock()
+		encrypter = mock()
 		userRepository.findByEmail.mockResolvedValue({ user: mockUser() })
 		hashComparer.compare.mockResolvedValue(true)
+		encrypter.encrypt.mockResolvedValue({ access_token: 'any_access_token' })
 	})
 
 	beforeEach(() => {
-		sut = new LoginFeature(userRepository, hashComparer)
+		sut = new LoginFeature(userRepository, hashComparer, encrypter)
 	})
 
 	test('should call FindByEmailUserRepository with correct input', async () => {
@@ -40,5 +43,13 @@ describe('login feature', () => {
 		await sut.execute({ email: 'any_mail@mail.com', password: 'any_password' })
 
 		expect(hashComparer.compare).toHaveBeenCalledWith({ value: 'any_password', hashed: 'hashed_password' })
+		expect(hashComparer.compare).toHaveBeenCalledTimes(1)
+	})
+
+	test('should call Encrypter with correct input', async () => {
+		await sut.execute({ email: 'any_mail@mail.com', password: 'any_password' })
+
+		expect(encrypter.encrypt).toHaveBeenCalledWith({ value: 1 })
+		expect(encrypter.encrypt).toHaveBeenCalledTimes(1)
 	})
 })

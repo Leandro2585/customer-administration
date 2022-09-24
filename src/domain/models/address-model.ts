@@ -1,4 +1,5 @@
 export type AddressModel = {
+  id: number
   uf: string
   city: string
   country: string

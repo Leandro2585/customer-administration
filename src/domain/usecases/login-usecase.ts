@@ -7,5 +7,5 @@ export interface LoginUsecase {
 export namespace LoginUsecase {
   export type Input = { email: string, password: string }
 
-  export type Output = { user: UserModel, token: string } | void
+  export type Output = { user: UserModel, access_token: string } | void
 }
