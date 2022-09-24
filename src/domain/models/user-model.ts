@@ -8,4 +8,5 @@ export type UserModel = {
   rg: string
   phone: string
   address: AddressModel[]
+  password: string
 }

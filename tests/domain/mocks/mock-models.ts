@@ -8,7 +8,8 @@ export const mockUser = (): UserModel => ({
 	cpf: '303.595.000-80',
 	rg: '40.236.802-2',
 	phone: '(68) 2832-4780',
-	address: [mockAddress()]
+	address: [mockAddress()],
+	password: 'hashed_password'
 })
 
 export const mockAddress = (): AddressModel => ({
