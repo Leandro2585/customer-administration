@@ -15,10 +15,10 @@ export const mockUser = (): UserModel => ({
 
 export const mockAddress = (): AddressModel => ({
 	id: 1,
+	user_id: 1,
 	zipcode: '69905-450',
 	city: 'Rio Branco',
 	uf: 'AC',
 	district: 'Cidade Nova',
-	country: 'Brasil',
 	number: 316
 })
