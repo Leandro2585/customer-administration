@@ -1,5 +1,5 @@
 export interface Hasher {
-  hash (payload: Hasher.Input): Promise<Hasher.Output>
+  hash (input: Hasher.Input): Promise<Hasher.Output>
 }
 
 export namespace Hasher {
