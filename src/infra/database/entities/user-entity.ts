@@ -32,3 +32,15 @@ export class UserEntity {
   @UpdateDateColumn()
   	updated_at!: Date
 }
+
+export namespace UserEntity {
+  export type Fields = {
+    name: string
+    email: string
+  	birth_date: Date
+  	cpf: string
+  	rg: string
+  	phone: string
+  	password: string
+  }
+}
