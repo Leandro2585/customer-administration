@@ -6,6 +6,7 @@ import { makeFakeDatabase } from '../helpers/mock-db'
 import { PgUserRepository } from '@infra/database/repositories'
 import { UserEntity } from '@infra/database/entities'
 import { mockUser, mockUserEntity } from '@tests/domain/mocks'
+import { UserModel } from '@domain/models'
 
 describe('pg user repository', () => {
 	let sut: PgUserRepository
@@ -40,5 +41,9 @@ describe('pg user repository', () => {
 				user: mockUserEntity()
 			})
 		})
+	})
+
+	describe('create()', () => {
+	
 	})
 })
