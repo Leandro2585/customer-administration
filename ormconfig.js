@@ -6,7 +6,7 @@ module.exports = {
 	host: 'localhost',
 	username: 'postgres',
 	password: '12345678',
-	database: 'internal_notes',
+	database: 'customer_administration',
 	port: 5432,
 	entities: [
 		`./${root}/infra/database/entities/*.ts`
