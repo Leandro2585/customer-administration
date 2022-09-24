@@ -1,7 +1,7 @@
 import { mock, MockProxy } from 'jest-mock-extended'
 
 import { FindByEmailUserRepository } from '@domain/protocols/repositories'
-import { NotFoundError } from '@domain/errors'
+import { IncorrectPasswordError, NotFoundError } from '@domain/errors'
 import { LoginFeature } from '@domain/features'
 import { Encrypter, HashComparer } from '@domain/protocols/cryptography'
 import { mockUser } from '@tests/domain/mocks'
@@ -51,5 +51,12 @@ describe('login feature', () => {
 
 		expect(encrypter.encrypt).toHaveBeenCalledWith({ value: 1 })
 		expect(encrypter.encrypt).toHaveBeenCalledTimes(1)
+	})
+
+	test('should throw IncorrectPasswordError when password provided is incorrect', async () => {
+		hashComparer.compare.mockResolvedValueOnce(false)
+		const promise = sut.execute({ email: 'non_existent_mail@mail.com', password: 'incorrect_password' })
+    
+		await expect(promise).rejects.toThrow(new IncorrectPasswordError())
 	})
 })

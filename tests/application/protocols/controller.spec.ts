@@ -1,5 +1,6 @@
 import { ServerError } from '@application/errors'
 import { Controller, HttpResponse } from '@application/protocols'
+import { IncorrectPasswordError } from '@domain/errors'
 
 class ControllerStub extends Controller {
 	result: HttpResponse = {
@@ -57,6 +58,16 @@ describe('controller', () => {
 		expect(httpResponse).toEqual({
 			status_code: 400,
 			data: new Error('validation_error')
+		})
+	})
+
+	test('should return 401 if execute throws with instanceof IncorrectPasswordError', async () => {
+		jest.spyOn(sut, 'execute').mockRejectedValueOnce(new IncorrectPasswordError())
+		const httpResponse = await sut.handle('any_value')
+
+		expect(httpResponse).toEqual({
+			status_code: 401,
+			data: new IncorrectPasswordError()
 		})
 	})
 })

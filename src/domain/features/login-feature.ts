@@ -1,6 +1,6 @@
 import { FindByEmailUserRepository } from '@domain/protocols/repositories'
 import { Encrypter, HashComparer } from '@domain/protocols/cryptography'
-import { NotFoundError } from '@domain/errors'
+import { IncorrectPasswordError, NotFoundError } from '@domain/errors'
 import { LoginUsecase } from '@domain/usecases'
 
 export class LoginFeature implements LoginUsecase {
@@ -21,5 +21,6 @@ export class LoginFeature implements LoginUsecase {
 				user
 			}
 		}
+		throw new IncorrectPasswordError()
 	}
 }

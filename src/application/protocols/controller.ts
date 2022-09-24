@@ -1,5 +1,6 @@
-import { badRequest, serverError } from '@application/helpers'
+import { badRequest, serverError, unauthorized } from '@application/helpers'
 import { HttpResponse } from '@application/protocols'
+import { IncorrectPasswordError } from '@domain/errors'
 
 interface IController {
   execute(httpRequest: any): Promise<HttpResponse>
@@ -19,6 +20,9 @@ export abstract class Controller implements IController {
   	try {
   		return await this.execute(httpRequest)
   	} catch (error) {
+  		if(error instanceof IncorrectPasswordError) {
+  			return unauthorized(error)
+  		}
   		return serverError(error)
   	}
   }
