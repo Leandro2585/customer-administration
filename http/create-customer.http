@@ -1,0 +1,28 @@
+POST http://localhost:3333/api/customer/create
+Content-Type: application/json
+
+{
+	"name": "Leandro Real 2",
+  "email": "leo.real2585@gmail.com",
+  "birth_date": "2003-04-20",
+  "cpf": "786.636.804-06",
+  "rg": "41.831.368-4",
+  "phone": "(21) 2648-7264",
+  "password": "12345678",
+  "addresses": [
+    {
+      "uf": "SP",
+      "city": "Santana de Parnaíba",
+      "district": "Jardim Metrópole",
+      "zipcode": "25571-162",
+      "number": 122
+    },
+    {
+      "uf": "SP",
+      "city": "Santana de Parnaíba",
+      "district": "Jardim Metrópole",
+      "zipcode": "25571-162",
+      "number": 232
+    }
+  ]
+}

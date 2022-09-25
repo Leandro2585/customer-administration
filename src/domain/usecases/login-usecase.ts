@@ -1,4 +1,4 @@
-import { UserModel } from '@domain/models'
+import { UserEntity } from '@infra/database/entities'
 
 export interface LoginUsecase {
   execute(input: LoginUsecase.Input): Promise<LoginUsecase.Output>
@@ -7,5 +7,5 @@ export interface LoginUsecase {
 export namespace LoginUsecase {
   export type Input = { email: string, password: string }
 
-  export type Output = { user: UserModel, access_token: string } | void
+  export type Output = { user: Omit<UserEntity, 'password'>, access_token: string }
 }

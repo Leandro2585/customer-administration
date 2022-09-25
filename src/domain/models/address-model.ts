@@ -1,5 +1,4 @@
 export type AddressModel = {
-  id: number
   user_id: number
   uf: string
   city: string

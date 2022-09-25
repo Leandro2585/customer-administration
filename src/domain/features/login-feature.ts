@@ -16,6 +16,7 @@ export class LoginFeature implements LoginUsecase {
 		const passwordIsCorrect = await this.hashComparer.compare({ value: input.password, hashed: user.password })
 		if (passwordIsCorrect) {
 			const { access_token } = await this.encrypter.encrypt({ value: user.id })
+			delete user.password
 			return {
 				access_token,
 				user
