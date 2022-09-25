@@ -23,7 +23,7 @@ export class UserEntity {
   @Column()
   	phone!: string
   
-  @Column()
+  @Column({ select: false })
   	password!: string
 
   @CreateDateColumn()
